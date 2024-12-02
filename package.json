@@ -1,0 +1,16 @@
+{
+  "name": "kirin-store-vjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tailwindcss -i ./public/tailwind-setup/input.css -o ./public/tailwind-setup/index.css --watch",
+    "start": "tailwindcss -i ./public/tailwind-setup/input.css -o ./public/tailwind-setup/index.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.15"
+  }
+}

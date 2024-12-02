@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./img/night-dragon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./tailwind-setup/index.css" />
+    <link rel="stylesheet" href="./vendor/aos/aos.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Kirin Store</title>
+  </head>
+  <body class="overflow-x-hidden text-gray-100 bg-gray-900">
+    <header
+      class="bg-gray-800 bg-opacity-50 head backdrop-blur-md z-[50]"
+      data-aos="fade-down"
+      data-aos-duration="600"
+      data-aos-delay="100"
+    >
+      <div
+        class="container flex items-center justify-between px-4 py-5 mx-auto"
+      >
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2 text-3xl font-bold text-purple-400">
+          <img src="./img/light-dragon.png" alt="ks" class="w-10">
+          <span>Kirin Store</span>
+        </a>
+
+        <!-- Barre de recherche -->
+        <div class="justify-center flex-grow hidden md:flex">
+          <form class="w-full max-w-md lg:max-w-lg xl:max-w-2xl">
+            <div class="relative">
+              <input
+                type="text"
+                placeholder="Rechercher un produit..."
+                id="search"
+                class="hidden w-full px-5 py-3 pr-12 text-sm text-gray-100 bg-gray-800 border-2 border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 hover:ring-2 hover:ring-purple-400"
+              />
+              <button
+                type="submit"
+                id="search2"
+                class="absolute top-0 right-0 hidden px-5 py-3 text-black rounded-r-lg"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  class="w-6 h-6 hover:text-purple-400"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 21l-4.35-4.35m1.44-3.68a7 7 0 11-9.9-9.9 7 7 0 019.9 9.9z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Menu (Caché en mobile) -->
+        <nav class="flex items-center py-3 space-x-6">
+          <button class="font-medium text-gray-400 hover:text-purple-600">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-search"
+              id="lucide-search"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+          <button
+            id="openModal"
+            class="font-medium text-gray-400 hover:text-purple-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-user-round"
+            >
+              <circle cx="12" cy="8" r="5" />
+              <path d="M20 21a8 8 0 0 0-16 0" />
+            </svg>
+          </button>
+          <button id="openSidebar" class="font-medium text-gray-400 hover:text-purple-600">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-shopping-cart"
+            >
+              <circle cx="8" cy="21" r="1" />
+              <circle cx="19" cy="21" r="1" />
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              />
+            </svg>
+          </button>
+          <!-- Bouton menu burger (Visible en mobile) -->
+          <button id="menu-toggle" class="flex items-center md:hidden">
+            <input id="burger-checkbox" type="checkbox" />
+            <label class="burger" for="burger-checkbox">
+              <span></span>
+              <span></span>
+              <span></span>
+            </label>
+          </button>
+        </nav>
+      </div>
+      <!-- Menu mobile (visible) -->
+      <div
+        class="container flex items-center justify-between hidden px-4 py-5 mx-auto navigation md:flex"
+      >
+        <div class="pl-0 space-x-7 produit">
+          <a href="#" class="text-gray-400 hover:text-purple-400"
+            >Tous les produits</a
+          >
+          <a href="#" class="text-gray-400 hover:text-purple-400">Offres</a>
+        </div>
+        <div class="pr-0 support">
+          <a href="#" class="text-gray-400 hover:text-purple-400">Support</a>
+        </div>
+      </div>
+      <!-- Barre de recherche-2 -->
+      <div class="container flex justify-center px-4 py-3 mx-auto md:hidden">
+        <form class="w-full max-w-2xl">
+          <div class="relative">
+            <input
+              type="text"
+              placeholder="Rechercher un produit..."
+              id="search3"
+              class="hidden w-full px-5 py-3 pr-12 text-sm bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 hover:ring-2 hover:ring-purple-400"
+            />
+            <button
+              type="submit"
+              id="search4"
+              class="absolute top-0 right-0 hidden px-5 py-3 text-gray-700 rounded-r-lg"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="w-6 h-6 text-black hover:text-purple-500"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 21l-4.35-4.35m1.44-3.68a7 7 0 11-9.9-9.9 7 7 0 019.9 9.9z"
+                />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- Menu mobile (Caché par défaut) -->
+      <nav
+        id="mobile-menu"
+        class="flex flex-col hidden px-4 pb-3 space-y-4 bg-gray-800 md:hidden"
+      >
+        <a
+          href="#"
+          class="block px-4 py-5 pb-3 text-gray-400 border-t border-b border-gray-600 hover:text-purple-400"
+          >Tous les produits</a
+        >
+        <a
+          href="#"
+          class="block px-4 py-2 pb-3 text-gray-400 border-b border-gray-600 hover:text-purple-400"
+          >Offres</a
+        >
+        <a href="#" class="block px-4 py-2 text-gray-400 hover:text-purple-400"
+          >Support</a
+        >
+      </nav>
+    </header>
+    <div
+      class="relative min-h-screen bg-center bg-cover"
+      style="background-image: url('./img/fond.jpg')"
+    >
+      <!-- Overlay pour rendre le texte plus lisible -->
+      <div class="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
+
+      <!-- Contenu -->
+      <div
+        class="container relative z-10 flex items-center justify-between min-h-screen px-4 mx-auto"
+      >
+        <!-- Section de bienvenue -->
+        <div
+          class="w-full space-y-6 text-white md:w-1/2"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+        >
+          <h1 class="text-4xl font-bold pixelify-sans-regular md:text-6xl">
+            Bienvenue sur Kirin Store
+          </h1>
+          <p class="text-lg md:text-xl">
+            Découvrez une large gamme de produits uniques conçus pour répondre à
+            vos besoins. Nous sommes ravis de vous accueillir !
+          </p>
+          <a
+            href="#"
+            class="inline-block px-6 py-3 text-white transition bg-purple-600 rounded-lg hover:bg-purple-500"
+          >
+            En savoir plus
+          </a>
+        </div>
+
+        <!-- Image PNG -->
+        <div
+          class="hidden md:block md:w-1/2"
+          data-aos="fade-left"
+          data-aos-easing="ease-in-sine"
+          data-aos-duration="800"
+          data-aos-delay="400"
+        >
+          <img
+            src="./img/cybor2.png"
+            alt="Image illustrative"
+            class="w-full max-w-2xl mx-auto"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="min-h-screen py-10 bg-gradient-to-r from-gray-900 via-black to-purple-950">
+      <div class="container px-4 mx-auto">
+        <h1 class="mb-8 text-3xl font-bold text-center text-gray-400"
+        data-aos="zoom-in-up"
+        data-aos-duration="600"
+        data-aos-delay="100">
+          - Produits derniere generetion -
+        </h1>
+        <div class="grid grid-cols-1 gap-6 p-8 rounded-md sm:grid-cols-2 lg:grid-cols-3 ">
+          <!-- Carte 1 -->
+          <div
+            class="p-6 shadow-2xl rounded-2xl "
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="100"
+          >
+            <!-- Conteneur pour l'image avec cadre -->
+            <div
+              class="relative flex items-center justify-center w-full h-48 bg-gray-800 bg-opacity-50 rounded-lg "
+            >
+              <!-- Image du produit -->
+               <a href="../app/produit.html">
+                 <img
+                   src="./img/st-18.webp"
+                   alt="Produit"
+                   class="object-cover w-40 h-40 rounded-lg"
+                 />
+               </a>
+              <!-- Cadre PNG -->
+              <img
+                src="./img/cy2.png"
+                alt="Cadre"
+                class="absolute inset-0 w-full h-full scale-110 pointer-events-none"
+              />
+            </div>
+
+            <!-- Contenu du produit -->
+            <h2 class="mt-6 text-xl font-semibold text-white">
+              PC portable gamer Stealth 18 AI Studio A1VHG-004FR
+            </h2>
+            <p class="mt-2 text-gray-400">
+              L'ordinateur portable Stealth 18 AI Studio est l'évolution parfaite pour l'ère à venir
+            </p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="text-lg font-bold text-white">€ 4 299.00</span>
+              <button
+                class="px-4 py-2 text-white transition bg-purple-600 rounded-lg hover:bg-purple-500"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+
+          <!-- Carte 2 -->
+          <div
+            class="p-6 shadow-2xl rounded-2xl"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="200"
+          >
+            <!-- Conteneur pour l'image avec cadre -->
+            <div
+              class="relative flex items-center justify-center w-full h-48 bg-gray-800 bg-opacity-50 rounded-lg"
+            >
+              <!-- Image du produit -->
+               <a href="../app/produit.html">
+                 <img
+                   src="./img/carte.webp"
+                   alt="Produit"
+                   class="object-cover w-40 h-40 rounded-lg"
+                 />
+               </a>
+              <!-- Cadre PNG -->
+              <img
+                src="./img/cy2.png"
+                alt="Cadre"
+                class="absolute inset-0 w-full h-full scale-110 pointer-events-none"
+              />
+            </div>
+
+            <!-- Contenu du produit -->
+            <h2 class="mt-6 text-xl font-semibold text-white">GeForce RTX 4060 GAMING 8G</h2>
+            <p class="mt-2 text-gray-400">
+              Prenez le contrôle total sur votre carte avec le logiciel d'overclocking de carte graphique le plus apprécié au monde.
+            </p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="text-lg font-bold text-white">€ 319.00</span>
+              <button
+                class="px-4 py-2 text-white transition bg-purple-600 rounded-lg hover:bg-purple-500"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <!-- Carte 3 -->
+          <div
+            class="p-6 shadow-2xl rounded-2xl"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="300"
+          >
+            <!-- Conteneur pour l'image avec cadre -->
+            <div
+              class="relative flex items-center justify-center w-full h-48 bg-gray-800 bg-opacity-50 rounded-lg"
+            >
+              <!-- Image du produit -->
+               <a href="../app/produit.html">
+                 <img
+                   src="./img/moniteur.webp"
+                   alt="Produit"
+                   class="object-cover w-40 h-40 rounded-lg"
+                 />
+               </a>
+              <!-- Cadre PNG -->
+              <img
+                src="./img/cy2.png"
+                alt="Cadre"
+                class="absolute inset-0 w-full h-full scale-110 pointer-events-none"
+              />
+            </div>
+
+            <!-- Contenu du produit -->
+            <h2 class="mt-6 text-xl font-semibold text-white">Écran Gamer | MPG 491CQP QD-OLED</h2>
+            <p class="mt-2 text-gray-400">
+              Dalle QD-OLED nouvelle génération pour des images d'une qualité incroyable
+            </p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="text-lg font-bold text-white">€ 1099.99</span>
+              <button
+                class="px-4 py-2 text-white transition bg-purple-600 rounded-lg hover:bg-purple-500"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <!-- Carte 4 -->
+          <div
+            class="p-6 shadow-2xl rounded-2xl"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="400"
+          >
+            <!-- Conteneur pour l'image avec cadre -->
+            <div
+              class="relative flex items-center justify-center w-full h-48 bg-gray-800 bg-opacity-50 rounded-lg"
+            >
+              <!-- Image du produit -->
+               <a href="../app/produit.html">
+                 <img
+                   src="./img/uc2.webp"
+                   alt="Produit"
+                   class="object-cover w-40 h-40 rounded-lg"
+                 />
+               </a>
+              <!-- Cadre PNG -->
+              <img
+                src="./img/cy2.png"
+                alt="Cadre"
+                class="absolute inset-0 w-full h-full scale-110 pointer-events-none"
+              />
+            </div>
+
+            <!-- Contenu du produit -->
+            <h2 class="mt-6 text-xl font-semibold text-white">PC Gamer | MAG Infinite S3 14NUC7-1436EU</h2>
+            <p class="mt-2 text-gray-400">
+              Le MAG Infinite S3 utilise un processeur Intel de 14ème génération associé à une carte graphique RTX série.
+            </p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="text-lg font-bold text-white">€ 1 999.99</span>
+              <button
+                class="px-4 py-2 text-white transition bg-purple-600 rounded-lg hover:bg-purple-500"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <!-- Carte 5 -->
+          <div
+            class="p-6 shadow-2xl rounded-2xl"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="500"
+          >
+            <!-- Conteneur pour l'image avec cadre -->
+            <div
+              class="relative flex items-center justify-center w-full h-48 bg-gray-800 bg-opacity-50 rounded-lg"
+            >
+              <!-- Image du produit -->
+               <a href="../app/produit.html">
+                 <img
+                   src="./img/carte-m.webp"
+                   alt="Produit"
+                   class="object-cover w-40 h-40 rounded-lg"
+                 />
+               </a>
+              <!-- Cadre PNG -->
+              <img
+                src="./img/cy2.png"
+                alt="Cadre"
+                class="absolute inset-0 w-full h-full scale-110 pointer-events-none"
+              />
+            </div>
+
+            <!-- Contenu du produit -->
+            <h2 class="mt-6 text-xl font-semibold text-white">MPG Z890 EDGE TI WIFI</h2>
+            <p class="mt-2 text-gray-400">
+              La MPG Z890 EDGE TI WIFI est une carte mère ATX destinée au jeu ave cune alimentation CPU double rail à 16 phases.
+            </p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="text-lg font-bold text-white">€ 469.99</span>
+              <button
+                class="px-4 py-2 text-white transition bg-purple-600 rounded-lg hover:bg-purple-500"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <!-- Carte 6 -->
+          <div
+            class="p-6 shadow-2xl rounded-2xl"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="600"
+          >
+            <!-- Conteneur pour l'image avec cadre -->
+            <div
+              class="relative flex items-center justify-center w-full h-48 bg-gray-800 bg-opacity-50 rounded-lg"
+            >
+              <!-- Image du produit -->
+               <a href="../app/produit.html">
+                 <img
+                   src="./img/stealth.webp"
+                   alt="Produit"
+                   class="object-cover w-40 h-40 rounded-lg"
+                 />
+               </a>
+              <!-- Cadre PNG -->
+              <img
+                src="./img/cy2.png"
+                alt="Cadre"
+                class="absolute inset-0 w-full h-full scale-110 pointer-events-none"
+              />
+            </div>
+
+            <!-- Contenu du produit -->
+            <h2 class="mt-6 text-xl font-semibold text-white">PC portable gamer Stealth 16 AI Studio A1VFG-012FR</h2>
+            <p class="mt-2 text-gray-400">
+              En combinant un style affûté et des performances optimales, le nouveau Stealth 16 AI Studio A1V invite chaque joueur à devenir un véritable voyageur
+            </p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="text-lg font-bold text-white">€ 2 299.00</span>
+              <button
+                class="px-4 py-2 text-white transition bg-purple-600 rounded-lg hover:bg-purple-500"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      id="modal"
+      class="fixed inset-0 z-[999] flex items-center justify-center hidden bg-black bg-opacity-50 "
+    >
+      <div class="w-3/4 max-w-5xl p-8 bg-gray-800 rounded-lg shadow-lg">
+        <!-- Titre -->
+        <h2 class="mb-6 text-2xl font-bold text-center text-gray-100">
+          - Se connecter au compte Kirin -
+        </h2>
+
+        <!-- Contenu principal -->
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <!-- Section gauche -->
+          <div>
+            <h3 class="space-y-2 text-lg font-semibold text-gray-100">
+              Vous n'êtes pas encore membre de kirin ?
+            </h3>
+            <p class="mt-2 text-gray-400">
+              Devenez membre de kirin pour suivre les dernières promotions et
+              mises à jour du support.
+            </p>
+            <button
+              class="px-6 py-3 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-500"
+            >
+              Créez un compte
+            </button>
+
+            <h4 class="flex gap-1 mt-6 text-lg font-semibold text-gray-100">
+             <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-user-round"
+            >
+              <circle cx="12" cy="8" r="5" />
+              <path d="M20 21a8 8 0 0 0-16 0" />
+            </svg> Avantages de l'adhésion
+            </h4>
+            <div class="flex flex-col gap-4 pb-4 mt-2 text-gray-400 border-b border-gray-600">
+              <div class="flex gap-2">
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/>
+                  </svg>
+                </div>Enregistrement de la garantie
+              </div>
+             <div  class="flex gap-2"><div><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg></div>Des mises à jour exclusives sur les promotions et les événements</div>
+             <div class="flex gap-2"><div><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg></div>Un service et un support produit plus</div>
+            </div>
+            <p class="mt-4 text-gray-400">
+              <h4 class="mt-6 text-lg font-semibold text-gray-100">MyKIRIN</h4>
+              <p class="pb-4 mt-2 text-gray-400"> vous offre un accès privilégié à tout
+                l'univers kirin. Contenu exclusif, quêtes, récompenses, gestion des
+                tickets d'assistance… tout est à portée de main !</p>
+            </p>
+          </div>
+
+          <!-- Section droite -->
+          <div>
+            <form>
+              <div class="mb-4">
+                <label for="email" class="block font-semibold text-gray-100"
+                  >Email</label
+                >
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Entrez votre email"
+                  class="w-full px-4 py-2 mt-2 text-sm text-gray-100 bg-gray-800 border border-2 border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 hover:ring-2 hover:ring-purple-400"
+                  required
+                />
+              </div>
+              <div class="mb-4">
+                <label for="password" class="block font-semibold text-gray-100">
+                  Mot de passe
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="Entrez votre mot de passe"
+                  class="w-full px-4 py-2 mt-2 text-sm text-gray-100 bg-gray-800 border border-2 border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 hover:ring-2 hover:ring-purple-400"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                class="w-full px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-500"
+              >
+                Connexion
+              </button>
+            </form>
+            <a
+              href="#"
+              class="block mt-4 text-sm text-blue-600 hover:underline"
+            >
+              Vous avez oublié votre mot de passe ?
+            </a>
+
+            <p class="mt-6 text-center text-gray-400">OU CONNECTEZ-VOUS AVEC</p>
+            <div class="flex justify-center mt-4 space-x-4">
+              <button
+                class="flex items-center justify-center w-10 h-10 bg-blue-600 rounded-lg hover:bg-blue-500"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8.051 0a8.051 8.051 0 100 16.102 8.051 8.051 0 000-16.102zm1.66 8.224h-1.106V12h-2.08V8.224H4.874V6.295h1.65V5.1c0-1.7 1.09-2.63 2.591-2.63.737 0 1.368.054 1.55.078v1.797h-1.06c-.835 0-.994.397-.994.978v1.072h2.011l-.263 1.929z"
+                  />
+                </svg>
+              </button>
+              <button
+                class="flex items-center justify-center w-10 h-10 bg-red-500 rounded-lg hover:bg-red-400"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.77 2.69 6.84 6.2 7.77v-5.5H4.35V8h1.85V6.37c0-1.83 1.08-2.83 2.73-2.83.8 0 1.65.14 1.65.14v1.85h-.93c-.92 0-1.2.58-1.2 1.16V8h2.05l-.33 2.27h-1.72v5.5C13.31 14.84 16 11.77 16 8c0-4.42-3.58-8-8-8z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- side barre -->
+
+    <div class="relative">
+       <!-- Overlay -->
+      <div
+        id="overlay"
+        class="fixed inset-0 z-40 hidden bg-black bg-opacity-50"
+      ></div>
+    
+      <!-- Sidebar -->
+      <div
+        id="sidebar"
+        class="fixed top-0 right-0 z-[999] h-full max-w-full text-white transition-transform duration-300 transform translate-x-full bg-gray-900 shadow-lg w-[400px] sm:w-[500px] md:w-[600px] rounded-lg"
+      >
+        <!-- En-tête de la sidebar -->
+        <div class="flex items-center justify-between p-6 border-b border-gray-700">
+          <h2 class="text-2xl font-semibold">Votre Panier</h2>
+          <button id="closeSidebar" class="text-gray-400 hover:text-gray-200">
+            ✖
+          </button>
+        </div>
+    
+    <!-- Contenu principal -->
+    <div class="flex flex-col items-center justify-center h-full space-y-6">
+      <!-- Logo -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+      <p class="text-lg font-medium text-gray-300">
+        Votre panier est vide
+      </p>
+      <button
+        class="px-6 py-3 text-lg font-medium bg-blue-600 rounded-lg hover:bg-blue-500"
+      >
+        Commencer les achats
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- paralax -->
+<section id="cta" class="relative bg-fixed bg-center bg-cover bg-cta-bg py-28">
+  <!-- Overlay noir avec opacité -->
+  <div class="absolute inset-0 bg-black opacity-50"></div>
+
+  <div class="container relative z-10 px-6 mx-auto lg:px-16">
+    <div class="lg:flex lg:items-center">
+      <!-- Texte à gauche -->
+      <div class="text-center lg:w-2/3 lg:text-left"
+      data-aos="fade-right"
+       data-aos-duration="600"
+       data-aos-delay="100">
+        <h3 class="text-2xl font-bold text-white lg:text-3xl">kirinTech</h3>
+        <p class="mt-4 text-white">
+          Our platform offers you all kinds of games, whether it's FPS or MMORPG. <br> The choices are limitless.
+        </p>
+      </div>
+
+      <!-- Bouton à droite -->
+      <div class="flex justify-center mt-6 lg:w-1/3 lg:mt-0 lg:justify-end"
+      data-aos="fade-left"
+       data-aos-duration="600"
+       data-aos-delay="300">
+        <a href="#"
+          class="inline-block px-8 py-3 text-sm font-medium tracking-wider text-white transition border-2 border-white rounded-full lg:text-base hover:bg-purple-500 hover:border-purple-500">
+          View Games
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- no produit -->
+
+  <section id="products" class="py-24 text-white bg-gray-900">
+    <div class="container mx-auto text-center">
+      <h2 class="mb-20 text-3xl font-semibold text-gray-400"
+        data-aos="zoom-in-up"
+        data-aos-duration="600"
+        data-aos-delay="100">Découvrez nos produits</h2>
+      
+      <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6">
+        <!-- Produit 1 -->
+        <div 
+          class="flex flex-col items-center group"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="100"
+        >
+        <a href="../app/ordinateurs.html">
+          <img src="./img/icon_laptops.webp" alt="Produit 1" class="object-contain w-24 h-24 mb-4 transition-transform transform group-hover:-translate-y-2">
+        </a>
+          <p class="text-lg text-violet-500">Ordinateurs portables</p>
+        </div>
+  
+        <!-- Produit 2 -->
+        <div class="flex flex-col items-center group"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="200">
+        <a href="../app/ecrans.html">
+          <img src="./img/icon_monitors.webp" alt="Produit 2" class="object-contain w-24 h-24 mb-4 transition-transform transform group-hover:-translate-y-2">
+        </a>
+          <p class="text-lg text-violet-500">Écrans</p>
+        </div>
+  
+        <!-- Produit 3 -->
+        <div class="flex flex-col items-center group"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="300">
+        <a href="../app/bureau.html">
+          <img src="./img/icon_desktop.webp" alt="Produit 3" class="object-contain w-24 h-24 mb-4 transition-transform transform group-hover:-translate-y-2">
+        </a>
+          <p class="text-lg text-violet-500">Ordinateurs de bureau</p>
+        </div>
+  
+        <!-- Produit 4 -->
+        <div class="flex flex-col items-center group"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="400">
+        <a href="../app/cartes-graphiques.html">
+          <img src="./img/icon_graphic.webp" alt="Produit 4" class="object-contain w-24 h-24 mb-4 transition-transform transform group-hover:-translate-y-2">
+        </a>
+          <p class="text-lg text-violet-500">Cartes graphiques</p>
+        </div>
+  
+        <!-- Produit 5 -->
+        <div class="flex flex-col items-center group"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="500">
+        <a href="../app/cartes-meres.html">
+          <img src="./img/icon_Motherboards.webp" alt="Produit 5" class="object-contain w-24 h-24 mb-4 transition-transform transform group-hover:-translate-y-2">
+        </a>
+          <p class="text-lg text-violet-500">Cartes mères</p>
+        </div>
+  
+        <!-- Produit 6 -->
+        <div class="flex flex-col items-center group"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="600">
+        <a href="../app/accessoires.html">
+          <img src="./img/icon_accessories.webp" alt="Produit 6" class="object-contain w-24 h-24 mb-4 transition-transform transform group-hover:-translate-y-2">
+        </a>
+          <p class="text-lg text-violet-500">Accessoires</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- produit recommandes -->
+
+    <section id="products" class="py-16 text-white bg-gray-900">
+      <div class="container mx-auto ">
+        <!-- Titre -->
+        <h2 class="text-3xl font-semibold text-center text-gray-400 mb-14"
+        data-aos="zoom-in-up"
+        data-aos-duration="600"
+        data-aos-delay="100">Produits recommandés</h2>
+        
+        <!-- Grille des produits -->
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          <!-- Produit 1 -->
+          <div class="flex flex-col p-6 bg-gray-800 rounded-lg shadow-lg" 
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="500">
+            <img src="./img/5.webp" alt="Produit 1" class="object-contain w-full h-48 mb-4">
+            <h3 class="mb-2 text-lg font-semibold">MPG A1000G PCIE5 : Alimentation, 80 Plus Gold, ATX 3.0, Support GPU</h3>
+            
+            <!-- Étoiles -->
+            <div class="flex mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+            </div>
+    
+            <!-- Liste des caractéristiques -->
+            <ul class="ml-6 text-sm text-gray-400 list-none ">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+    
+            <!-- Prix -->
+            
+            <!-- Bouton -->
+            <div class="mt-auto">
+              <p class="pt-3 mb-4 text-xl font-semibold border-t border-gray-600">$199.99 <span class="text-gray-500 line-through">$219</span> -10%</p>
+               <button class="px-6 py-3 text-sm font-medium tracking-wider text-white transition bg-purple-500 rounded-lg hover:bg-purple-400">
+                 Ajouter au panier
+               </button>
+             </div>
+          </div>
+    
+          <!-- Produit 2 -->
+          <div class="flex flex-col p-6 bg-gray-800 rounded-lg shadow-lg"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="400">
+            <img src="./img/4.webp" alt="Produit 2" class="object-contain w-full h-48 mb-4">
+            <h3 class="mb-2 text-lg font-semibold">Écran Gamer | G255PF E2</h3>
+            
+            <!-- Étoiles -->
+            <div class="flex mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+            </div>
+    
+            <!-- Liste des caractéristiques -->
+            <ul class="ml-6 text-sm text-gray-400 list-disc ">
+              <li>24.5 pouces</li>
+              <li>1920x1080 FHD</li>
+              <li>180 Hz</li>
+              <li>Adaptive Sync</li>
+              <li>Falt</li>
+              <li>["81 cm"]</li>
+            </ul>
+    
+            <!-- Prix -->
+            
+            <!-- Bouton -->
+            <div class="mt-auto">
+               <p class="pt-3 mb-4 text-xl font-semibold border-t border-gray-600">$129.99 <span class="text-gray-500 line-through">$179</span> -28%</p>
+               <button class="px-6 py-3 text-sm font-medium tracking-wider text-white transition bg-purple-500 rounded-lg hover:bg-purple-400">
+                 Ajouter au panier
+               </button>
+             </div>
+          </div>
+    
+           <!-- Produit 1 -->
+           <div class="flex flex-col p-6 bg-gray-800 rounded-lg shadow-lg"
+           data-aos="fade-up"
+           data-aos-duration="600"
+           data-aos-delay="300">
+            <img src="./img/3.webp" alt="Produit 1" class="object-contain w-full h-48 mb-4">
+            <h3 class="mb-2 text-lg font-semibold">Écran Gamer | MAG 27C6X</h3>
+            
+            <!-- Étoiles -->
+            <div class="flex mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+            </div>
+    
+            <!-- Liste des caractéristiques -->
+            <ul class="ml-6 text-sm text-gray-400 list-disc ">
+              <li>27 pouces</li>
+              <li>1920x1080 FHD</li>
+              <li>250 Hz</li>
+              <li>Adaptive Sync</li>
+              <li>1500R</li>
+              <li>["90 cm"]</li>
+            </ul>
+    
+            <!-- Prix -->
+            
+            <!-- Bouton -->
+            <div class="mt-auto">
+              <p class="pt-3 mb-4 text-xl font-semibold border-t border-gray-600">$179.99 <span class="text-gray-500 line-through">$189</span> -6%</p>
+              <button class="px-6 py-3 text-sm font-medium tracking-wider text-white transition bg-purple-500 rounded-lg hover:bg-purple-400">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+
+           <!-- Produit 1 -->
+           <div class="flex flex-col p-6 bg-gray-800 rounded-lg shadow-lg"
+           data-aos="fade-up"
+           data-aos-duration="600"
+           data-aos-delay="200">
+            <img src="./img/2.webp" alt="Produit 1" class="object-contain w-full h-48 mb-4">
+            <h3 class="mb-2 text-lg font-semibold">PC portable gamer Katana 15 B13VEK-1697FR</h3>
+            
+            <!-- Étoiles -->
+            <div class="flex mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+            </div>
+    
+            <!-- Liste des caractéristiques -->
+            <ul class="ml-6 text-sm text-gray-400 list-disc ">
+              <li>Windows 11 Famille</li>
+              <li>Intel Core i5</li>
+              <li>Nvidia GeForce RTX 4050</li>
+              <li>1920x1080 FHD</li>
+              <li>RAM 16 Go</li>
+            </ul>
+    
+            <!-- Prix -->
+            
+            <!-- Bouton -->
+            <div class="mt-auto">
+              <p class="pt-3 mb-4 text-xl font-semibold border-t border-gray-600">$999.00 <span class="text-gray-500 line-through">$1349.00</span> -26%</p>
+              <button class="px-6 py-3 text-sm font-medium tracking-wider text-white transition bg-purple-500 rounded-lg hover:bg-purple-400">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          
+           <!-- Produit 1 -->
+           <div class="flex flex-col p-6 bg-gray-800 rounded-lg shadow-lg"
+           data-aos="fade-up"
+           data-aos-duration="600"
+           data-aos-delay="100">
+            <img src="./img/1.webp" alt="Produit 1" class="object-contain w-full h-48 mb-4">
+            <h3 class="mb-2 text-lg font-semibold">[Jeu offert] GeForce RTX 4070 Ti SUPER 16G GAMING SLIM STALKER 2 EDITION</h3>
+            
+            <!-- Étoiles -->
+            <div class="flex mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 17.75l-5.1 3.07 1.35-5.98-4.7-4.08 6.14-.52L12 2.25l2.31 7.45 6.14.52-4.7 4.08 1.35 5.98L12 17.75z"/>
+              </svg>
+            </div>
+    
+            <!-- Liste des caractéristiques -->
+            <ul class="ml-6 text-sm text-gray-400 list-none ">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+    
+            <!-- Prix -->
+            
+            <!-- Bouton -->
+            <div class="mt-auto">
+              
+              <p class="pt-3 mb-4 text-xl font-semibold border-t border-gray-600">$959.00 <span class="text-gray-500 line-through">$1039.00</span> -8%</p>
+              <button class="px-6 py-3 text-sm font-medium tracking-wider text-white transition bg-purple-500 rounded-lg hover:bg-purple-400">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- pourquoi nous choisir -->
+
+    <section class="py-16 text-white bg-gray-900">
+      <div class="container px-6 mx-auto">
+        <!-- Titre principal -->
+        <h2 class="text-4xl font-bold text-center text-gray-400 mb-14"
+        data-aos="zoom-in-up"
+        data-aos-duration="600"
+        data-aos-delay="100">Pourquoi nous choisir</h2>
+    
+        <!-- Grille des blocs -->
+        <div class="grid grid-cols-1 gap-12 md:grid-cols-2 ">
+          <!-- Bloc 1 -->
+          <div class="flex items-center p-8 space-x-6 bg-gray-800 rounded-lg shadow-lg"
+          data-aos="fade-right"
+          data-aos-duration="600"
+          data-aos-delay="100">
+            <img src="./img/icon_warranty.webp" alt="Logo 1" class="w-16 h-16">
+            <div class="space-y-3">
+              <h3 class="text-xl font-semibold text-white">Garantie complète</h3>
+              <p class="text-gray-400">Tous les produits sont couverts par une garantie d'un an minimum.</p>
+            </div>
+          </div>
+    
+          <!-- Bloc 2 -->
+          <div class="flex items-center p-8 space-x-6 bg-gray-800 rounded-lg shadow-lg"
+          data-aos="fade-left"
+          data-aos-duration="600"
+          data-aos-delay="300">
+            <img src="./img/icon_payment.webp" alt="Logo 2" class="w-16 h-16">
+            <div class="space-y-3">
+              <h3 class="text-xl font-semibold text-white">Paiement sécurisé</h3>
+              <p class="text-gray-400">Système de paiement sécurisé et protection des acheteurs.</p>
+            </div>
+          </div>
+    
+          <!-- Bloc 3 -->
+          <div class="flex items-center p-8 space-x-6 bg-gray-800 rounded-lg shadow-lg"
+          data-aos="fade-right"
+          data-aos-duration="600"
+          data-aos-delay="200">
+            <img src="./img/free-transportation.webp" alt="Logo 3" class="w-16 h-16">
+            <div class="space-y-3">
+              <h3 class="text-xl font-semibold text-white">
+                Livraison gratuite</h3>
+              <p class="text-gray-400">Livraison gratuite pour les commandes supérieures à 150 euros.</p>
+            </div>
+          </div>
+    
+          <!-- Bloc 4 -->
+          <div class="flex items-center p-8 space-x-6 bg-gray-800 rounded-lg shadow-lg"
+          data-aos="fade-left"
+          data-aos-duration="600"
+          data-aos-delay="400">
+            <img src="./img/icon_return.webp" alt="Logo 4" class="w-16 h-16">
+            <div class="space-y-3">
+              <h3 class="text-xl font-semibold text-white">Garantie de retour</h3>
+              <p class="text-gray-400">Politique de retour dans les 14 jours à compter de la date d'achat.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <!-- FAQ -->
+    <section class="container px-6 mx-auto">
+      <h2 class="text-3xl font-semibold text-center text-gray-400 mb-14"
+        data-aos="zoom-in-up"
+        data-aos-duration="600"
+        data-aos-delay="100">Aide et conseils</h2>
+      <!-- Accordion Item 1 -->
+      <div class="border-b border-slate-200"
+      data-aos="fade-up"
+      data-aos-duration="600"
+      data-aos-delay="100">
+        <button onclick="toggleAccordion(1)" class="flex items-center justify-between w-full py-5 text-slate-100">
+          <span>Vers quel pays l'expédition est-elle possible ?</span>
+          <span id="icon-1" class="transition-transform duration-300 text-slate-100">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+              <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+            </svg>
+          </span>
+        </button>
+        <div id="content-1" class="overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+          <div class="pb-5 text-xl text-slate-500">
+            Les expéditions ne sont possibles qu'en France.
+          </div>
+        </div>
+      </div>
+      
+      <!-- Accordion Item 2 -->
+      <div class="border-b border-slate-200"
+      data-aos="fade-up"
+      data-aos-duration="600"
+      data-aos-delay="200">
+        <button onclick="toggleAccordion(2)" class="flex items-center justify-between w-full py-5 text-slate-100">
+          <span>Combien de temps prend la livraison?</span>
+          <span id="icon-2" class="transition-transform duration-300 text-slate-100">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+              <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+            </svg>
+          </span>
+        </button>
+        <div id="content-2" class="overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+          <div class="pb-5 text-xl text-slate-500">
+            De la commande à la réception, environ 4 jours ouvrés
+          </div>
+        </div>
+      </div>
+      
+      <!-- Accordion Item 3 -->
+      <div class="border-b border-slate-200"
+      data-aos="fade-up"
+      data-aos-duration="600"
+      data-aos-delay="300">
+        <button onclick="toggleAccordion(3)" class="flex items-center justify-between w-full py-5 text-slate-100">
+          <span>Je n'ai pas trouvé la preuve d'achat dans ma boîte mail. Que dois-je faire ?</span>
+          <span id="icon-3" class="transition-transform duration-300 text-slate-100">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+              <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+            </svg>
+          </span>
+        </button>
+        <div id="content-3" class="overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+          <div class="pb-5 text-xl text-slate-500">
+            Vérifiez le dossier « Courrier indésirable ». Si vous n'avez pas reçu votre preuve d'achat, veuillez nous contacter. La preuve d'achat est générée automatiquement lorsque le colis est expédié depuis notre entrepôt.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="relative text-gray-400 bg-gray-900 body-font">
+      <div class="container flex flex-wrap px-5 py-24 mx-auto sm:flex-nowrap">
+        <div class="relative flex items-end justify-start p-10 overflow-hidden bg-gray-900 rounded-lg lg:w-2/3 md:w-1/2 sm:mr-10"
+        data-aos="fade-right"
+        data-aos-duration="600"
+        data-aos-delay="100">
+          <iframe width="100%" height="100%" title="map" class="absolute inset-0" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed" style="filter: grayscale(1) contrast(1.2) opacity(0.16);"></iframe>
+          <div class="relative flex flex-wrap py-6 bg-gray-900 rounded shadow-md">
+            <div class="px-6 lg:w-1/2">
+              <h2 class="text-xs font-semibold tracking-widest text-white title-font">ADDRESS</h2>
+              <p class="mt-1">Photo booth tattooed prism, portland taiyaki hoodie neutra typewriter</p>
+            </div>
+            <div class="px-6 mt-4 lg:w-1/2 lg:mt-0">
+              <h2 class="text-xs font-semibold tracking-widest text-white title-font">EMAIL</h2>
+              <a class="leading-relaxed text-indigo-400">hei.hiratra@gmail.com</a>
+              <h2 class="mt-4 text-xs font-semibold tracking-widest text-white title-font">PHONE</h2>
+              <p class="leading-relaxed">034 48 391 46</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col w-full mt-8 lg:w-1/3 md:w-1/2 md:ml-auto md:py-8 md:mt-0"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="300">
+          <h2 class="mb-1 text-lg font-medium text-white title-font">Feedback</h2>
+          <p class="mb-5 leading-relaxed">Post-ironic portland shabby chic echo park, banjo fashion axe</p>
+          <div class="relative mb-4">
+            <label for="name" class="text-sm leading-7 text-gray-400">Name</label>
+            <input type="text" id="name" name="name" class="w-full px-3 py-1 text-base leading-8 text-gray-100 transition-colors duration-200 ease-in-out bg-gray-800 border border-gray-700 rounded outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900">
+          </div>
+          <div class="relative mb-4">
+            <label for="email" class="text-sm leading-7 text-gray-400">Email</label>
+            <input type="email" id="email" name="email" class="w-full px-3 py-1 text-base leading-8 text-gray-100 transition-colors duration-200 ease-in-out bg-gray-800 border border-gray-700 rounded outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900">
+          </div>
+          <div class="relative mb-4">
+            <label for="message" class="text-sm leading-7 text-gray-400">Message</label>
+            <textarea id="message" name="message" class="w-full h-32 px-3 py-1 text-base leading-6 text-gray-100 transition-colors duration-200 ease-in-out bg-gray-800 border border-gray-700 rounded outline-none resize-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900"></textarea>
+          </div>
+          <button class="px-6 py-2 text-lg text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">envoyer</button>
+          <p class="mt-3 text-xs text-gray-400 text-opacity-90">Chicharrones blog helvetica normcore iceland tousled brook viral artisan.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <footer class="text-gray-400 bg-gray-900 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-wrap -mx-4 -mb-10 text-center md:text-left">
+            <div class="w-full px-4 lg:w-1/6 md:w-1/2">
+              <h2 class="mb-3 text-sm font-medium tracking-widest text-white title-font">À propos de kirin</h2>
+              <nav class="mb-10 list-none">
+                <p class="text-gray-400 hover:text-white">
+                    kirin, leader mondial du secteur informatique et présent dans plus de 120 pays, façonne l'avenir de la technologie. Nos innovations, allant d'ordinateurs portables à l'AIoT, sont créées en pensant aux utilisateurs, et allient qualité et design.
+                </p>
+              </nav>
+            </div>
+            <div class="w-full px-4 lg:w-1/6 md:w-1/2">
+              <h2 class="mb-3 text-sm font-medium tracking-widest text-white title-font">Termes et conditions
+              </h2>
+              <nav class="mb-10 list-none">
+                <li>
+                  <a class="text-gray-400 hover:text-white">Mentions légales</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Conditions d'utilisation</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Politique de confidentialité</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Retour de déchets électroniques</a>
+                </li>
+              </nav>
+            </div>
+            <div class="w-full px-4 lg:w-1/6 md:w-1/2">
+              <h2 class="mb-3 text-sm font-medium tracking-widest text-white title-font">Vente</h2>
+              <nav class="mb-10 list-none">
+                <li>
+                  <a class="text-gray-400 hover:text-white">Politique de garantie des produits kirin</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Instructions d'extension de garantie</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Règlement et conditions des promotions</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Promotions KIRIN</a>
+                </li>
+              </nav>
+            </div>
+            <div class="w-full px-4 lg:w-1/6 md:w-1/2">
+              <h2 class="mb-3 text-sm font-medium tracking-widest text-white title-font">CATEGORIES</h2>
+              <nav class="mb-10 list-none">
+                <li>
+                  <a class="text-gray-400 hover:text-white">First Link</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Second Link</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Third Link</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                </li>
+              </nav>
+            </div>
+            <div class="w-full px-4 lg:w-1/6 md:w-1/2">
+              <h2 class="mb-3 text-sm font-medium tracking-widest text-white title-font">CATEGORIES</h2>
+              <nav class="mb-10 list-none">
+                <li>
+                  <a class="text-gray-400 hover:text-white">First Link</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Second Link</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Third Link</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                </li>
+              </nav>
+            </div>
+            <div class="w-full px-4 lg:w-1/6 md:w-1/2">
+              <h2 class="mb-3 text-sm font-medium tracking-widest text-white title-font">CATEGORIES</h2>
+              <nav class="mb-10 list-none">
+                <li>
+                  <a class="text-gray-400 hover:text-white">First Link</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Second Link</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Third Link</a>
+                </li>
+                <li>
+                  <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                </li>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-800">
+          <div class="container flex flex-wrap items-center px-5 py-8 mx-auto">
+            <div class="flex flex-wrap items-end justify-center md:flex-nowrap md:justify-start">
+              <div class="relative w-40 mr-2 sm:w-64 sm:mr-4">
+                
+                <input type="text" id="footer-field" name="footer-field" class="w-full px-3 py-1 text-base leading-8 text-gray-100 transition-colors duration-200 ease-in-out bg-gray-800 border border-gray-700 rounded outline-none bg-opacity-40 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent focus:border-indigo-500">
+              </div>
+              <button class="inline-flex px-6 py-2 text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">envoyer</button>
+              <p class="mt-2 text-sm text-center text-gray-500 md:ml-6 md:mt-0 sm:text-left">Bitters chicharrones fanny pack
+                <br class="hidden lg:block">waistcoat green juice
+              </p>
+            </div>
+            <span class="inline-flex justify-center w-full mt-6 lg:ml-auto lg:mt-0 md:justify-start md:w-auto">
+              <a class="text-gray-400 hover:text-blue-700">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                </svg>
+              </a>
+              <a class="ml-3 text-gray-400 hover:text-sky-600">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                  <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                </svg>
+              </a>
+              <a class="ml-3 text-gray-400 hover:text-red-700">
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                </svg>
+              </a>
+              <a class="ml-3 text-gray-400">
+                <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                  <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                  <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                </svg>
+              </a>
+            </span>
+          </div>
+        </div>
+        <div class="bg-gray-800 bg-opacity-75">
+          <div class="container flex flex-col flex-wrap px-5 py-4 mx-auto sm:flex-row">
+            <p class="text-sm text-center text-gray-400 sm:text-left">© 2024 Kirin-Store —
+              <a href="https://twitter.com/knyttneve" class="ml-1 text-gray-500" target="_blank" rel="noopener noreferrer">@Hiratra</a>
+            </p>
+            <span class="w-full mt-2 text-sm text-center text-gray-400 sm:ml-auto sm:mt-0 sm:w-auto sm:text-left">Designed by <a href="https://www.instagram.com/danarsonhiratra?igsh=MW5ncXk1NGt4dzRoeg==">Hiratra</a> </span>
+          </div>
+        </div>
+      </footer>
+    </footer>
+
+
+    <!-- Back to Top Button -->
+    <!-- Back to Top Button -->
+  <button id="backToTop" 
+    class="fixed hidden p-3 text-white bg-purple-500 rounded-full shadow-lg bottom-8 right-8 hover:bg-purple-700 focus:outline-none">
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      class="w-6 h-6" fill="none" 
+      viewBox="0 0 24 24" 
+      stroke="currentColor" 
+      stroke-width="2"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+    </svg>
+  </button>
+
+
+    <script src="./vendor/aos/aos.js"></script>
+    <script src="./js/aosInit.js"></script>
+    <script src="./js/header.js"></script>
+    <script src="./js/accordion.js"></script>
+    <script src="./js/backtotop.js"></script>
+  </body>
+</html>
